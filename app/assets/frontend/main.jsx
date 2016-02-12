@@ -10,16 +10,20 @@ class Main extends React.Component {
     };
   }
   addTweet(tweetToAdd) {
-    let actualTweetList = this.state.tweetList;
-    actualTweetList.unshift({
-      id: Date.now(),
-      name: 'Guest',
-      body: tweetToAdd
-    });
-    
-    this.setState({ tweetList: actualTweetList })
-    
-  };
+    $.post("/tweets", { body: tweetToAdd })
+    .success( savedTweet => {
+      let actualTweetList = this.state.tweetList;
+      actualTweetList.unshift(savedTweet);
+      this.setState({ tweetList: actualTweetList })
+    })
+    .error(error => console.log(error))
+  }
+  
+  componentDidMount(){
+    $.ajax("/tweets")
+    .success(data => this.setState({ tweetList:data }))
+    .error(error => console.log(error));
+  }
   render() {
     return(
       <div className="container">
