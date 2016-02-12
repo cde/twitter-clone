@@ -13,3 +13,9 @@
 /tmp
 
 .idea
+
+# Ignore webpack js files
+/app/assets/javascripts/bundle.*
+
+# Ignore node modules
+node_modules
