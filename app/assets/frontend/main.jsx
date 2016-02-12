@@ -9,19 +9,29 @@ class Main extends React.Component {
       tweetList: []
     };
   }
+  formattedTweets(tweetList){
+    let formattedlist = tweetList.map( tweet => {
+      tweet.formattedDate = moment(tweet.created_at).fromNow();
+      return tweet;
+    });
+    return {
+      tweetList: tweetList
+    };
+  }
+  
   addTweet(tweetToAdd) {
     $.post("/tweets", { body: tweetToAdd })
     .success( savedTweet => {
       let actualTweetList = this.state.tweetList;
       actualTweetList.unshift(savedTweet);
-      this.setState({ tweetList: actualTweetList })
+      this.setState(this.formattedTweets(actualTweetList))
     })
     .error(error => console.log(error))
   }
   
   componentDidMount(){
     $.ajax("/tweets")
-    .success(data => this.setState({ tweetList:data }))
+    .success(data => this.setState(this.formattedTweets(data)))
     .error(error => console.log(error));
   }
   render() {
