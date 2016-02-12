@@ -17,7 +17,7 @@
   <div class="row right">
     <% if current_user || user_signed_in? %>
       Welcome! 
-      <%= current_user.email %> | 
+      <%= link_to  current_user.display_name, "/profile" %> | 
       <%= link_to "logout", destroy_user_session_path, method: 'DELETE' %>
     <% else %>  
       <%= link_to('login', new_user_session_path) %> | 
