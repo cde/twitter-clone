@@ -6,5 +6,11 @@ export default {
     $.get("/tweets")
     .success( rawTweets => ServerActions.receivedTweets(rawTweets) )
     .error(error => console.log(error));
+  },
+  createTweet(body) {
+    $.post("/tweets", { body: body })
+    .success( savedTweet => ServerActions.savedOneTweet(savedTweet) )
+    .error(error => console.log(error))
   }
+
 }
