@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 // using an ES6 transpiler, like babel
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Router, Route, Link, browserHistory, hashHistory} from 'react-router'
 
 import Index from "./components/Index";
 import Follow from "./components/Follow";
@@ -18,7 +18,7 @@ let documentReady = () => {
   let reactNode = document.getElementById('react');
   if (reactNode) {
     ReactDOM.render (
-      <Router history={browserHistory} >
+      <Router history={hashHistory} >
         <Route component={App}>
           <Route path="/" component={Index}></Route>
           <Route path="/follow" component={Follow}></Route>
